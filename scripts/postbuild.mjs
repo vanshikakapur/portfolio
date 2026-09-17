@@ -83,7 +83,9 @@ for (const route of routes) {
     ),
   )
   const { title, description } = metaFor(route.path)
-  const url = route.path === '/' ? home : `${home}${route.path.replace(/^\//, '')}`
+  // Trailing slash: Pages serves dir/index.html and 301s the slashless path to
+  // it, so a canonical without the slash points at a redirect.
+  const url = route.path === '/' ? home : `${home}${route.path.replace(/^\//, '')}/`
 
   let html = template
     .replace('<div id="root"></div>', `<div id="root">${body}</div>`)
