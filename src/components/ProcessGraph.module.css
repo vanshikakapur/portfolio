@@ -1,0 +1,117 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  /* Fixed aspect so the canvas never changes the page height as it sizes —
+     this is where layout shift would otherwise come from. */
+  aspect-ratio: 16 / 9;
+  min-height: 260px;
+  touch-action: pan-y;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.nodes {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nodeItem {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.nodeButton {
+  width: 44px; /* pointer target, independent of the drawn radius */
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: transform var(--dur-1) var(--ease-snap);
+}
+
+.nodeButton:hover {
+  transform: scale(1.08);
+}
+
+.nodeButton:active {
+  transform: scale(0.94);
+}
+
+.nodeButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.readout {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  line-height: 1.4;
+  /* Reserve the tallest state so swapping content never reflows. */
+  min-height: 3.6em;
+  pointer-events: none;
+}
+
+.readoutLabel {
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.readoutSub {
+  color: var(--ink-muted);
+}
+
+.readoutFig {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.readoutIdle {
+  color: var(--ink-faint);
+}
+
+@media (max-width: 640px) {
+  .wrap {
+    aspect-ratio: 4 / 3;
+  }
+
+  .nodeButton {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nodeButton {
+    transition: none;
+  }
+
+  .nodeButton:hover,
+  .nodeButton:active {
+    transform: none;
+  }
+}

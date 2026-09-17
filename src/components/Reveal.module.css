@@ -1,0 +1,17 @@
+.reveal {
+  /* --p is written every frame from scroll geometry. Transform only, so this
+     stays on the compositor.
+     No fade: text at rest would have to sit near full opacity anyway to keep
+     4.5:1 against the surface, so the fade would be either invisible or a
+     contrast failure. The rise carries the motion instead. */
+  --p: 0;
+  transform: translate3d(0, calc((1 - var(--p)) * 18px), 0);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transform: none;
+    will-change: auto;
+  }
+}

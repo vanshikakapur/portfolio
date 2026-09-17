@@ -1,0 +1,122 @@
+/* Design tokens. Two neutrals + one accent, plus a single semantic hue that is
+   used only inside the process graph to mark undated edges. */
+
+:root {
+  /* --- neutral: bone (light surface) --- */
+  --bone-50: #faf8f3;
+  --bone-100: #f3f0e9;
+  --bone-200: #e7e2d7;
+  --bone-300: #d3ccbd;
+  --bone-400: #b0a795;
+
+  /* --- neutral: graphite (dark surface / light text) --- */
+  --graphite-900: #0e1012;
+  --graphite-800: #161a1d;
+  --graphite-700: #1f2429;
+  --graphite-600: #2c333a;
+  --graphite-400: #5d666e;
+  --graphite-200: #9aa2a9;
+
+  /* --- accent: signal amber. Two stops so text and marks can each hit
+         their own contrast target against their own background. --- */
+  --amber-text-on-light: #8f3d0e; /* 6.6:1 on --bone-100 */
+  --amber-mark: #c85a18;
+  --amber-bright: #e8843c; /* 7.1:1 on --graphite-900 */
+
+  /* Graph-only. Marks relations the source log does not date. */
+  --mark-deviation: #5b7a8c;
+
+  /* --- type --- */
+  --font-display: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --font-text: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* 1.2 minor third at text sizes, looser at display */
+  --step--2: 0.694rem;
+  --step--1: 0.833rem;
+  --step-0: 1rem;
+  --step-1: 1.2rem;
+  --step-2: 1.44rem;
+  --step-3: 1.728rem;
+  --step-4: 2.074rem;
+  --step-5: clamp(2.2rem, 1.4rem + 3.4vw, 3.25rem);
+  --step-6: clamp(2.9rem, 1.2rem + 7vw, 6.5rem);
+
+  --leading-tight: 1.04;
+  --leading-snug: 1.28;
+  --leading-body: 1.62;
+
+  /* --- space: 4px base, geometric-ish --- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4.5rem;
+  --sp-9: 7rem;
+  --sp-10: 10rem;
+
+  --measure: 62ch;
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --page-max: 78rem;
+
+  /* --- motion. Four curves, each with a job. Nothing else is allowed. --- */
+  --ease-token: cubic-bezier(0.2, 0.7, 0.2, 1); /* tokens settling into a node */
+  --ease-trace: cubic-bezier(0.65, 0, 0.35, 1); /* symmetric: scrub, reversible */
+  --ease-snap: cubic-bezier(0.34, 1.42, 0.64, 1); /* press release, slight overshoot */
+  --ease-drain: cubic-bezier(0.5, 0, 0.85, 0.3); /* exits, decay */
+
+  --dur-1: 120ms;
+  --dur-2: 220ms;
+  --dur-3: 380ms;
+  --dur-4: 620ms;
+  --stagger: 45ms;
+
+  --hairline: 1px;
+  --radius: 2px; /* deliberately near-square: this is a report, not a card UI */
+}
+
+/* Light is the default: ink on paper, an analysis report you could print. */
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+  --surface: var(--bone-100);
+  --surface-raised: var(--bone-50);
+  --surface-sunken: var(--bone-200);
+  --rule: var(--bone-300);
+  --rule-strong: var(--bone-400);
+  --ink: #14171a;
+  --ink-muted: #4a5157;
+  /* 4.53:1 at worst (on --surface-sunken); the old #6f7780 was 3.99:1. */
+  --ink-faint: var(--graphite-400);
+  --accent: var(--amber-text-on-light);
+  --accent-mark: var(--amber-mark);
+  --token-core: #ffffff;
+  --graph-edge: #9d9584;
+  --graph-node-fill: var(--bone-50);
+  --glow: 0;
+  --selection: #f0d9c4;
+}
+
+/* Dark is not an inversion: edges recede, tokens gain a bloom. A Studio
+   session at 11pm rather than a printed page. */
+[data-theme='dark'] {
+  color-scheme: dark;
+  --surface: var(--graphite-900);
+  --surface-raised: var(--graphite-800);
+  --surface-sunken: #090b0c;
+  --rule: var(--graphite-600);
+  --rule-strong: var(--graphite-400);
+  --ink: #e9e5dc;
+  --ink-muted: #a8b0b7;
+  --ink-faint: #7e878f; /* 4.79:1 at worst (on --surface-raised) */
+  --accent: var(--amber-bright);
+  --accent-mark: var(--amber-bright);
+  --token-core: #fff3e4;
+  --graph-edge: #333b42;
+  --graph-node-fill: var(--graphite-800);
+  --glow: 1;
+  --selection: #4a2c14;
+}

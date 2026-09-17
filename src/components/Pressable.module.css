@@ -1,0 +1,31 @@
+.host {
+  /* relative + overflow clip the ripple to the button; layout is the caller's. */
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  /* isolation keeps the ripple's compositing layer off the page root */
+  isolation: isolate;
+  transition: transform var(--dur-1) var(--ease-snap);
+}
+
+/* The ripple only fires for a real pointer press. This is the state itself, so
+   a held or keyboard-activated button also looks pressed. */
+.host:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.host:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+  will-change: transform, opacity;
+}

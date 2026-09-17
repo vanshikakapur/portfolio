@@ -1,0 +1,61 @@
+.foot {
+  border-top: var(--hairline) solid var(--rule);
+  background: var(--surface-raised);
+  margin-top: var(--sp-8);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--sp-5) var(--sp-7);
+  padding-block: var(--sp-7);
+}
+
+.pitch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.pitchBody {
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  line-height: var(--leading-snug);
+  max-width: 40ch;
+}
+
+.links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  font-size: var(--step--1);
+  text-align: right;
+}
+
+.colophon {
+  grid-column: 1 / -1;
+  padding-top: var(--sp-4);
+  border-top: var(--hairline) solid var(--rule);
+  font-size: var(--step--2);
+  color: var(--ink-faint);
+  max-width: 60ch;
+}
+
+.kbd {
+  font-family: var(--font-mono);
+  border: var(--hairline) solid var(--rule-strong);
+  border-radius: var(--radius);
+  padding: 0 4px;
+  color: var(--ink-muted);
+}
+
+@media (max-width: 700px) {
+  .inner {
+    grid-template-columns: 1fr;
+  }
+
+  .links {
+    text-align: left;
+  }
+}

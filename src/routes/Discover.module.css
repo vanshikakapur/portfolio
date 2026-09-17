@@ -1,0 +1,647 @@
+/* ---------- hero ---------- */
+
+.hero {
+  padding-block: var(--sp-8) var(--sp-8);
+}
+
+.heroInner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: var(--sp-7);
+  align-items: center;
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.title {
+  font-size: var(--step-6);
+  margin-block: calc(var(--sp-2) * -1) 0;
+}
+
+.standfirst {
+  font-size: var(--step-1);
+  line-height: var(--leading-snug);
+  color: var(--ink-muted);
+  max-width: 34ch;
+}
+
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-5);
+  margin: var(--sp-3) 0 0;
+  padding-top: var(--sp-4);
+  border-top: var(--hairline) solid var(--rule);
+}
+
+.status dt {
+  margin-bottom: 2px;
+}
+
+.status dd {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--ink);
+}
+
+.graphFigure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.replayButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  padding: 3px 8px;
+  border: var(--hairline) solid var(--rule);
+  border-radius: var(--radius);
+  transition:
+    color var(--dur-2) var(--ease-token),
+    border-color var(--dur-2) var(--ease-token);
+}
+
+.replayButton:hover,
+.replayButton[aria-pressed='true'] {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.replayButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Triangle at rest, two bars while running — drawn in CSS so there is no icon
+   font and no layout change between the two states. */
+.replayGlyph {
+  width: 7px;
+  height: 9px;
+  border-style: solid;
+  border-width: 4.5px 0 4.5px 7px;
+  border-color: transparent transparent transparent currentColor;
+}
+
+.replayButton[aria-pressed='true'] .replayGlyph {
+  border-width: 0 0 0 7px;
+  border-left-style: double;
+}
+
+/* Reserved so "Replay" and "Pause" occupy the same box. */
+.replayLabel {
+  min-width: 3.4em;
+  text-align: left;
+}
+
+.captionActions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+.captionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding-bottom: var(--sp-2);
+  border-bottom: var(--hairline) solid var(--rule);
+}
+
+.cursorButton {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.cursorHint {
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transition: opacity var(--dur-1) var(--ease-token);
+}
+
+.cursorButton:hover .cursorHint,
+.cursorButton:focus-visible .cursorHint {
+  opacity: 1;
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-1) var(--sp-5);
+  margin: 0;
+}
+
+.legend > div {
+  display: flex;
+  gap: var(--sp-2);
+  align-items: baseline;
+}
+
+.legend dt {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  color: var(--accent);
+}
+
+.legend dd {
+  margin: 0;
+  font-size: var(--step--2);
+  line-height: 1.45;
+  color: var(--ink-faint);
+}
+
+/* ---------- shared section chrome ---------- */
+
+.section {
+  padding-block: var(--sp-8);
+}
+
+.sectionTitle {
+  font-size: var(--step-5);
+}
+
+.sectionLead {
+  margin-top: var(--sp-3);
+  max-width: 52ch;
+  color: var(--ink-muted);
+}
+
+/* ---------- throughput ---------- */
+
+.figures {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: var(--sp-6) var(--sp-5);
+  margin-top: var(--sp-7);
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: var(--sp-3);
+  border-top: 2px solid var(--accent-mark);
+}
+
+.figureValue {
+  font-family: var(--font-display);
+  font-size: var(--step-5);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.figureUnit {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--accent);
+}
+
+.figureNote {
+  margin-top: var(--sp-2);
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+  line-height: 1.45;
+}
+
+.figureOrg {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  color: var(--ink-faint);
+}
+
+/* ---------- event log ---------- */
+
+.log {
+  list-style: none;
+  margin-top: var(--sp-7);
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 12rem minmax(0, 1fr) 13rem;
+  gap: var(--sp-6);
+  padding-block: var(--sp-6);
+  border-top: var(--hairline) solid var(--rule);
+}
+
+.entryHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.entrySpan {
+  margin: 0;
+}
+
+.entryTitle {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--step-1);
+  line-height: var(--leading-snug);
+  font-family: var(--font-display);
+}
+
+.entryOrg {
+  font-family: var(--font-text);
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+}
+
+.entryMeta {
+  font-size: var(--step--2);
+  color: var(--ink-faint);
+}
+
+.entryBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  min-width: 0;
+}
+
+.entrySummary {
+  font-size: var(--step-1);
+  line-height: var(--leading-snug);
+  max-width: 44ch;
+}
+
+.entryDetail {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  max-width: var(--measure);
+}
+
+.entryDetail li {
+  position: relative;
+  padding-left: var(--sp-4);
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+}
+
+.entryDetail li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: var(--sp-2);
+  height: 1px;
+  background: var(--rule-strong);
+}
+
+.entryTools {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1) var(--sp-3);
+}
+
+.entryTools li {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  color: var(--ink-faint);
+}
+
+.entryTools li::after {
+  content: ' /';
+  color: var(--rule-strong);
+}
+
+.entryTools li:last-child::after {
+  content: '';
+}
+
+.entryMetrics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  margin: 0;
+}
+
+.metricValue {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  line-height: 1;
+}
+
+.metricUnit {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--accent);
+  margin-top: 3px;
+}
+
+.metricNote {
+  margin: var(--sp-1) 0 0;
+  font-size: var(--step--2);
+  color: var(--ink-faint);
+  line-height: 1.45;
+}
+
+/* ---------- variants ---------- */
+
+.variants {
+  list-style: none;
+  display: grid;
+  /* Six tracks so each tier can claim a real share: primaries take a half,
+     the secondary the full width, supporting ones a third. The span comes from
+     the project's weight, not its position in the list. */
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--sp-6);
+  margin-top: var(--sp-7);
+}
+
+.spanHalf {
+  grid-column: span 3;
+}
+
+.spanFull {
+  grid-column: span 6;
+}
+
+.spanThird {
+  grid-column: span 2;
+}
+
+.variantPrimary,
+.variantSecondary,
+.variantSupporting {
+  position: relative; /* containing block for the stretched card link */
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  height: 100%;
+  padding: var(--sp-5);
+  border: var(--hairline) solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface-raised);
+  transition:
+    transform var(--dur-2) var(--ease-token),
+    border-color var(--dur-2) var(--ease-token);
+}
+
+.variantSupporting {
+  background: transparent;
+}
+
+/* The full-width tier reads across rather than down: heading and blurb on the
+   left, the path beside it, so it is not just a stretched primary card. */
+.variantSecondary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  grid-template-areas:
+    'kicker path'
+    'title  path'
+    'blurb  path'
+    'foot   foot';
+  column-gap: var(--sp-7);
+  align-content: start;
+  border-left: 2px solid var(--accent);
+}
+
+.variantSecondary > :first-child {
+  grid-area: kicker;
+}
+
+.variantSecondary .variantTitle {
+  grid-area: title;
+  font-size: var(--step-4);
+}
+
+.variantSecondary .variantBlurb {
+  grid-area: blurb;
+  font-size: var(--step-0);
+  max-width: 40ch;
+}
+
+.variantSecondary .variantFoot {
+  grid-area: foot;
+}
+
+.variantSecondary .variantPath {
+  grid-area: path;
+  align-self: center;
+}
+
+/* Read by PathGraph's dots, which stagger off it so the pulse runs along the
+   path instead of firing everywhere at once. */
+.variantPrimary:hover,
+.variantSecondary:hover,
+.variantSupporting:hover,
+.variantPrimary:has(.variantLink:focus-visible),
+.variantSecondary:has(.variantLink:focus-visible),
+.variantSupporting:has(.variantLink:focus-visible) {
+  --hot: 1;
+  transform: translate3d(0, -2px, 0);
+  border-color: var(--accent);
+}
+
+.variantPrimary:active,
+.variantSecondary:active,
+.variantSupporting:active {
+  transform: translate3d(0, 0, 0) scale(0.995);
+}
+
+/* Focus lands on the inner link, but the ring belongs on the whole card. */
+.variantPrimary:has(.variantLink:focus-visible),
+.variantSecondary:has(.variantLink:focus-visible),
+.variantSupporting:has(.variantLink:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.variantLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.variantLink::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+}
+
+.variantTitle {
+  font-size: var(--step-3);
+}
+
+.variantBlurb {
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+  max-width: 48ch;
+  flex: 1;
+}
+
+.variantFoot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-4);
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--sp-3);
+  margin-top: var(--sp-2);
+  border-top: var(--hairline) solid var(--rule);
+}
+
+.variantRole {
+  font-size: var(--step--2);
+  color: var(--ink);
+}
+
+.variantStat {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  color: var(--ink-faint);
+}
+
+/* ---------- toolchain ---------- */
+
+.tools {
+  margin: var(--sp-7) 0 0;
+}
+
+.toolRow {
+  display: grid;
+  grid-template-columns: 14rem minmax(0, 1fr);
+  gap: var(--sp-5);
+  padding-block: var(--sp-3);
+  border-top: var(--hairline) solid var(--rule);
+}
+
+.toolName {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--ink);
+}
+
+.toolArtifact {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+}
+
+.alsoUsed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-4);
+  border-top: var(--hairline) solid var(--rule);
+}
+
+.alsoList {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--ink-faint);
+  max-width: var(--measure);
+  line-height: 1.7;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 1024px) {
+  .heroInner {
+    grid-template-columns: 1fr;
+    gap: var(--sp-6);
+  }
+
+  .entry {
+    grid-template-columns: 10rem minmax(0, 1fr);
+  }
+
+  .entryMetrics {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--sp-5);
+  }
+
+  .entryMetrics > div {
+    min-width: 8rem;
+  }
+
+  /* A third of a tablet width is too narrow for a title and a blurb. */
+  .spanThird {
+    grid-column: span 3;
+  }
+
+  .variantSecondary {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'kicker' 'title' 'blurb' 'path' 'foot';
+    row-gap: var(--sp-3);
+  }
+}
+
+@media (max-width: 760px) {
+  .hero {
+    padding-block: var(--sp-6);
+  }
+
+  .variants {
+    grid-template-columns: 1fr;
+  }
+
+  .spanHalf,
+  .spanFull,
+  .spanThird {
+    grid-column: auto;
+  }
+
+  .variantSecondary {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'kicker' 'title' 'blurb' 'path' 'foot';
+    row-gap: var(--sp-3);
+  }
+
+  .entry {
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+  }
+
+  .toolRow {
+    grid-template-columns: 1fr;
+    gap: var(--sp-1);
+  }
+
+  .legend {
+    grid-template-columns: 1fr;
+  }
+}

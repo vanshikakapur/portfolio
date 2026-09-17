@@ -1,0 +1,171 @@
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: var(--hairline) solid var(--rule);
+}
+
+.barInner {
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding: var(--sp-3) var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+}
+
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--ink);
+  line-height: 1.15;
+}
+
+/* Its own colour overrides the global link hover, so it needs one of its own. */
+.wordmark:hover {
+  color: var(--accent);
+}
+
+.wordmarkName {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  letter-spacing: -0.01em;
+}
+
+.wordmarkRole {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--ink-faint);
+}
+
+.nav {
+  display: flex;
+  gap: var(--sp-4);
+  margin-left: auto;
+}
+
+.navLink,
+.navLinkOn {
+  position: relative;
+  font-size: var(--step--1);
+  text-decoration: none;
+  color: var(--ink-muted);
+  padding-block: var(--sp-1);
+}
+
+.navLinkOn {
+  color: var(--ink);
+}
+
+/* Underline drawn with a scaled pseudo-element: transform only, no layout. */
+.navLink::after,
+.navLinkOn::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-2) var(--ease-token);
+}
+
+.navLinkOn::after {
+  transform: scaleX(1);
+}
+
+.navLink:hover::after {
+  transform: scaleX(1);
+}
+
+/* The current page already has its underline drawn, so hover has to say it
+   another way rather than reading as dead. */
+.navLinkOn:hover {
+  color: var(--accent);
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.toolButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--ink-muted);
+  background: transparent;
+  border: var(--hairline) solid var(--rule);
+  border-radius: var(--radius);
+  padding: var(--sp-2) var(--sp-3);
+  cursor: pointer;
+  transition:
+    color var(--dur-1) var(--ease-token),
+    border-color var(--dur-1) var(--ease-token),
+    transform var(--dur-1) var(--ease-snap);
+}
+
+.toolButton:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.toolButton:active {
+  transform: scale(0.96);
+}
+
+.toolButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.themeGlyph {
+  min-width: 2.6em; /* stops the bar reflowing when the word changes */
+  text-align: center;
+}
+
+.kbd {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: var(--ink-faint);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .barInner {
+    gap: var(--sp-3);
+  }
+
+  .wordmarkRole {
+    display: none;
+  }
+
+  .nav {
+    gap: var(--sp-3);
+  }
+
+  /* The ⌘K label is meaningless on touch; the button stays, the hint goes. */
+  .kbd {
+    display: none;
+  }
+}
